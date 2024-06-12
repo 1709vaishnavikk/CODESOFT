@@ -1,0 +1,108 @@
+import java.util.Scanner;
+
+class ATM {
+    private double balance;
+
+    public ATM() {
+        this.balance = 0.0;  // Initial balance set to 0
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+}
+
+interface ATMinter {
+    void CheckBalance();
+    void WithdrawMoney(double withdrawAmount);
+    void DepositMoney(double depositAmount);
+}
+
+class ATMimple implements ATMinter {
+    ATM obj = new ATM();
+
+    
+    public void CheckBalance() {
+        System.out.println("Your current balance is: " + obj.getBalance());
+    }
+
+    
+    public void WithdrawMoney(double withdrawAmount) {
+        if (withdrawAmount <= obj.getBalance()) {
+            obj.setBalance(obj.getBalance() - withdrawAmount);
+            System.out.println("Rs " + withdrawAmount + " has been withdrawn successfully");
+            CheckBalance();
+        } else {
+            System.out.println("Insufficient balance.");
+        }
+    }
+
+    
+    public void DepositMoney(double depositAmount) {
+        obj.setBalance(obj.getBalance() + depositAmount);
+        System.out.println("Rs " + depositAmount + " has been deposited successfully");
+        CheckBalance();
+    }
+}
+
+class UserAccount extends ATMimple {
+    private final int ATMpin = 1234;
+
+    public void Operations() {
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            System.out.println("1. Check balance \n2. Withdraw Money \n3. Deposit Money \n4. EXIT");
+            System.out.println("Enter your choice: ");
+            int ch = sc.nextInt();
+            switch (ch) {
+                case 1:
+                    CheckBalance();
+                    break;
+                case 2:
+                    System.out.println("Enter the amount to be withdrawn:");
+                    double withdrawAmount = sc.nextDouble();
+                    WithdrawMoney(withdrawAmount);
+                    break;
+                case 3:
+                    System.out.println("Enter the amount to be deposited:");
+                    double depositAmount = sc.nextDouble();
+                    DepositMoney(depositAmount);
+                    break;
+                case 4:
+                    System.out.println("THANKS FOR USING ATM MACHINE.");
+                    System.out.println("COLLECT YOUR CARD.");
+                    return;  
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
+
+    public int getATMPin() {
+        return ATMpin;
+    }
+}
+
+public class ATMMain {
+    public static void main(String[] args) {
+        UserAccount userAccount = new UserAccount();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("WELCOME TO ATM...!");
+        System.out.println("ENTER YOUR ATM PIN");
+
+        int enteredPin = scanner.nextInt();
+        if (enteredPin == userAccount.getATMPin()) {
+            System.out.println("Validation Done Successfully");
+            userAccount.Operations();
+        } else {
+            System.out.println("Invalid PIN. Please try again.");
+        }
+
+        
+    }
+}
+
