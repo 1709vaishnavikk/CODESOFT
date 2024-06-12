@@ -1,0 +1,66 @@
+import java.util.Scanner;
+
+class Student {
+    int eng,math,sci,ssci,ger;
+    int total;
+    double per;
+    char grade;
+    public void marks(){
+        
+        Scanner sc=new Scanner(System.in);
+        System.out.println("ENTER YOUR MARKS FOR EACH SUBJECT OUT OF 100");
+        System.out.println("");
+        System.out.println("Enter marks in English subject");
+         eng=sc.nextInt();
+        System.out.println("Enter marks in Mathematics subject");
+         math=sc.nextInt();
+        System.out.println("Enter marks in Science subject");
+         sci=sc.nextInt();
+        System.out.println("Enter marks in Social Science subject");
+         ssci=sc.nextInt();
+        System.out.println("Enter marks in Germany subject");
+         ger=sc.nextInt();
+    }
+    public void totalmarks(){
+         total=eng+math+sci+ssci+ger;
+        System.out.println("TOTAL MARKS OUT OF 500: " +total);
+    }
+    public void percent(){
+        per=(total/500.0)*100;
+        System.out.println("YOUR PERCENTAGE ARE: "+per+"%");
+        
+    }
+    public void grades(){
+        if (per >= 90) {
+            grade = 'A';
+           
+        } else if (per >= 80 ) {
+            grade = 'B';
+            
+        } else if (per >= 70 ) {
+            grade = 'C';
+            
+        } else if (per >= 60 ) {
+            grade = 'D';
+            
+        } else {
+            grade = 'F';
+            
+        }
+        System.out.println("YOUR GARDE IS: "+ grade);
+    }
+}
+    public class StudentMain{
+    public static void main(String[] args) {
+        Student obj=new Student();
+        System.out.println("WELCOME TO STUDENT GRADE CALCULATOR");
+        System.out.println("------------------------------------------------");
+        obj.marks();
+        obj.totalmarks();
+        obj.percent();
+        obj.grades();
+        
+    }
+    
+}
+
