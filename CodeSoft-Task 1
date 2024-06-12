@@ -1,0 +1,65 @@
+import java.util.Random;
+import java.util.Scanner;
+
+class Numberguessing {
+    public static void main(String[] args) {
+        System.out.println("WELCOME TO NUMBER-GUESSING GAME");
+        System.out.println("YOU HAVE ONLY 4 CHANCES TO GUESS THE CORRECT NUMBER...BEST OF LUCK!");
+
+        Random r = new Random();
+        int random = r.nextInt(100) + 1;
+
+        Scanner sc = new Scanner(System.in);
+        
+        int cnt = 0;
+        int attempts = 4;
+        boolean flag = false;
+
+        while(attempts != 0 && !flag) {
+            System.out.println("ENTER YOUR GUESSED NUMBER(1-100): ");
+            int playernumber = sc.nextInt();
+
+            if(playernumber == random) {
+                System.out.println("Congratulations!!!....YOU WIN");
+                cnt += 1;
+                flag = true;  // End game after winning
+            } else if(random > playernumber) {
+                System.out.println("YOU HAVE GUESSED INCORRECTLY...(TOO LOW)");
+            } else {
+                System.out.println("YOU HAVE GUESSED INCORRECTLY...(TOO HIGH)");
+            }
+
+            attempts -= 1;
+           
+            System.out.println("REMAINING ATTEMPTS: " + attempts);
+            System.out.println("");
+
+            if(attempts > 0 && playernumber != random) {
+                System.out.println("DO YOU WANT TO CONTINUE THE GAME? ");
+                System.out.println("ENTER 1 IF YES AND 0 IF NO");
+                int ch = sc.nextInt();
+                if(ch == 1) {
+                    flag = false;
+                } else {
+                    flag = true;
+                    System.out.println("YOUR SCORE FOR THIS ROUND IS: " + cnt);
+                }
+            }
+            if(attempts==0){
+                System.out.println("YOUR SCORE FOR THIS ROUND IS: " + cnt);
+            }
+        }
+
+        if(attempts == 0 && flag) {
+            System.out.println("SORRY, YOU HAVE EXHAUSTED ALL YOUR ATTEMPTS. BETTER LUCK NEXT TIME!");
+        }
+
+        
+    }
+}
+
+
+
+
+    
+
